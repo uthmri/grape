@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="64" height="64" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+<g style="fill: transparent; stroke-width: 4; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round">
+    <ellipse cx="32" cy="32" rx="24" ry="24"/>
+    <line x1="32" y1="8" x2="32" y2="56"/>
+    <line x1="8" y1="32" x2="56" y2="32"/>
+</g>
+
+</svg>

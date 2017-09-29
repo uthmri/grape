@@ -1,0 +1,11 @@
+/GRAPE.pro.user
+/Makefile
+/Makefile.Debug
+/Makefile.Release
+/ui_mainwindow.h
+/bin/GRAPE
+/bin/log.txt
+/release/GRAPE.res
+/release/*.o
+/release/*.cpp
+/release/*.obj

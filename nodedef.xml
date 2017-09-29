@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NodeLibraries>
+	<GRAPE  type="Library"> 
+		<ImageOperations  type="Library"> 
+			<line type="Node" NumInputs="0" NumOutputs="0">
+			</line>
+			<arc type="Node" NumInputs="0" NumOutputs="0">
+			</arc>
+			<BET type="Node" NumInputs="1" NumOutputs="2">
+				<Input1 type="string" defaultvalue="1" mandatory="true" tooltip="Brain extraction" helptext="file phath of image to be stripped"/>
+				<Output1 type="string" defaultvalue="1" mandatory="true" tooltip="stripped image path" helptext="stripped image"/>
+				<Output2 type="string" defaultvalue="1" mandatory="true" tooltip="mask image path" helptext="mask image"/>
+			</BET>
+			<BiasCorrection type="Node" NumInputs="2" NumOutputs="1" tooltip="Bias Correction" helptext="Perform intensity nonuniformity correction">
+				<Input1 type="string" defaultvalue="1" mandatory="true" tooltip="Bias Correction" helptext="file name of image to be BC"/>
+				<Input2 type="string" defaultvalue="1" mandatory="false" tooltip="Mask file name" helptext="file name of the mask image"/>
+				<Output1 type="string" defaultvalue="1" mandatory="true" tooltip="file name " helptext="file name the BC image"/>				
+			</BiasCorrection>
+			<CurveFitting type="Node" NumInputs="1" NumOutputs="3">
+				<Input1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="CurveFitting" helptext="It fits a Curve to data ponts"/>
+				<Output1 type="ImageC" defaultvalue="1" mandatory="false" tooltip="Output Map 1 (ImageC format)" helptext="Output Map 1 (ImageC format)"/>	
+				<Output2 type="ImageC" defaultvalue="1" mandatory="false" tooltip="Output Map 2 (ImageC format)" helptext="Output Map 2 (ImageC format)"/>	
+				<Output3 type="ImageC" defaultvalue="1" mandatory="false" tooltip="Output Map 3 (ImageC format)" helptext="Output Map 3 (ImageC format)"/>	
+			</CurveFitting>
+			<ImageArithmetic type="Node" NumInputs="2" NumOutputs="1">
+				<Input1 type="{ImageC}{double}" defaultvalue="1" mandatory="true" tooltip="Image or number" helptext="Image or number"/>
+				<Input2 type="{ImageC}{double}" defaultvalue="1" mandatory="true" tooltip="Image or number" helptext="Image or number"/>
+				<Output1 type="{ImageC}{double}" defaultvalue="1" mandatory="true" tooltip="Image or number" helptext="Image or number"/>
+			</ImageArithmetic>			
+			<ImageNormalizer type="Node" NumInputs="1" NumOutputs="1">
+				<Input1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="Image" helptext="image to be normalized"/>
+				<Output1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="Image" helptext="normalized image"/>				
+			</ImageNormalizer>	
+			<ImageRegistration type="Node" NumInputs="4" NumOutputs="3">
+				<Input1 type="string" defaultvalue="1" mandatory="true" tooltip="moving image " helptext="file name of moving image "/>
+				<Input2 type="string" defaultvalue="1" mandatory="false" tooltip="fixed image" helptext="file name of fixed image"/>
+				<Input3 type="string" defaultvalue="1" mandatory="false" tooltip="affine transform txt" helptext="affine transform txt"/>
+				<Input4 type="string" defaultvalue="1" mandatory="false" tooltip="deformation field" helptext="deformation field"/>
+				<Output1 type="string" defaultvalue="1" mandatory="true" tooltip="registered image" helptext="file name of registered image"/>
+				<Output2 type="string" defaultvalue="1" mandatory="false" tooltip="affine transform txt" helptext="file name of affine transform txt"/>
+				<Output3 type="string" defaultvalue="1" mandatory="false" tooltip="deformation field" helptext="file name of deformation field"/>
+			</ImageRegistration>
+                        <ImageSegmentation type="Node" NumInputs="4" NumOutputs="2">
+                                <Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="First Input Image to be segmented" helptext="First Input Image to be segmented"/>
+                                <Input2 type="Int" defaultvalue="1" mandatory="false" tooltip="Second Input Image to be segmented(optional)" helptext="Second Input Image to be segmented(optional)"/>
+				<Input3 type="Int" defaultvalue="1" mandatory="false" tooltip="Third Input Image to be segmented(optional)" helptext="Image to be segmented(optional)"/>
+				<Input4 type="Int" defaultvalue="1" mandatory="true" tooltip="Mask Image to be segmented" helptext="Mask Image to be segmented"/>
+				<Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="Path of segmented Image" helptext="Path of segmented Image"/>
+				<Output2 type="Int" defaultvalue="1" mandatory="false" tooltip="Path of probabiliy Image" helptext="Path of probabiliy Image"/>
+                        </ImageSegmentation>
+                        <ImageProcessing type="Node" NumInputs="2" NumOutputs="1">
+                                <Input1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="First Input Image to be processed" helptext="First Input Image to be processed"/>
+                                <Input2 type="ImageC" defaultvalue="1" mandatory="false" tooltip="Second Input: Convolution Filter or another Image (optional)" helptext="Second Input: Convolution Filter or another Image (optional)"/>
+                                <Output1 type="ImageC" defaultvalue="1" mandatory="false" tooltip="Processed Image" helptext="Processed Image"/>
+                        </ImageProcessing>
+                        <ImageSlicer type="Node" NumInputs="3" NumOutputs="1">
+				<Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="Stack index" helptext="Index of stack"/>
+				<Input2 type="ImageC" defaultvalue="1" mandatory="true" tooltip="3D/4D Image" helptext="image to be sliced"/>
+				<Input3 type="Int" defaultvalue="1" mandatory="false" tooltip="Slice index" helptext="Index of slice"/>
+				<Output1 type="2D/3D image" defaultvalue="1" mandatory="true" tooltip="number of oranges" helptext="number of oranges in the box"/>
+			</ImageSlicer>
+                        <ImageReformat type="Node" NumInputs="1" NumOutputs="1">
+				<Input1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="3D/4D Image" helptext="image to be reformed"/>
+				<Output1 type="2D/3D image" defaultvalue="1" mandatory="true" tooltip="number of oranges" helptext="number of oranges in the box"/>
+			</ImageReformat>
+			<ImageStack type="Node" NumInputs="7" NumOutputs="1">
+					<Input1 type="string" defaultvalue="1" mandatory="true" tooltip="Reads the Images from the file " helptext="Reads DICOM/NIfTI/Analyze and xmlREC Images"/>
+					<Output1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="ImageC" helptext="ImageC"/>
+			</ImageStack>
+			<ImageStatistics type="Node" NumInputs="2" NumOutputs="1">
+				<Input1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="image" helptext="image"/>
+				<Input2 type="ImageC" defaultvalue="1" mandatory="false" tooltip="mask image" helptext="mask image"/>
+				<Output1 type="Qvariant" defaultvalue="1" mandatory="true" tooltip="image statistics" helptext="{max}{min}{SD}{variance}{mean}{median}{percentile}"/>
+			</ImageStatistics>
+			<LogOperation type="Node" NumInputs="2" NumOutputs="1">
+				<Input1 type="Qvariant" defaultvalue="1" mandatory="true" tooltip="argument 1" helptext="argument 1"/>
+				<Input2 type="Qvariant" defaultvalue="1" mandatory="true" tooltip="argument 2" helptext="argument 2"/>
+				<Output1 type="boolean" defaultvalue="1" mandatory="true" tooltip="true or false" helptext="true or false"/>
+			</LogOperation>		
+			
+			<RelOperator type="Node" NumInputs="2" NumOutputs="1">
+				<Input1 type="Qvariant" defaultvalue="1" mandatory="true" tooltip="operand" helptext="operand"/>
+				<Input2 type="Qvariant" defaultvalue="1" mandatory="true" tooltip="operand" helptext="operand"/>
+				<Output1 type="boolean" defaultvalue="1" mandatory="true" tooltip="result" helptext="result"/>
+			</RelOperator>
+		</ImageOperations> 		
+		<IO  type="Library"> 
+				<Source type="Node" NumInputs="0" NumOutputs="1">		
+					<Output1 type="{string}{byte}{int}{float}{double}{boolean}{file}{rand}{randn}" defaultvalue="1" mandatory="true" tooltip="Data source" helptext="Generate numbers, strings, and arrays of numbers"/>				
+				</Source>
+				<Sink type="Node" NumInputs="1" NumOutputs="1">
+					<Input1 type="{ImageDisplay}{PrintText}{WritetoFile}" defaultvalue="0" mandatory="true" tooltip="display/print/write data" helptext="Data sink. Can print numers, display images, or save to a file"/>
+					<Output1 type="string" defaultvalue="1" mandatory="false" tooltip="output" helptext="sink output depends on input type and operation"/>
+				</Sink>
+				<ParReader type="Node" NumInputs="1" NumOutputs="8">
+					<Input1 type="string" defaultvalue="1" mandatory="false" tooltip="file name of parametrs" helptext="Reads the parameters from the file"/>
+					<Output1 type="string" defaultvalue="1" mandatory="false" tooltip="parametr1 value" helptext="parametr1 value"/>
+					<Output2 type="string" defaultvalue="1" mandatory="false" tooltip="parametr2 value" helptext="parametr2 value"/>
+					<Output3 type="string" defaultvalue="1" mandatory="false" tooltip="parametr3 value" helptext="parametr3 value"/>
+					<Output4 type="string" defaultvalue="1" mandatory="false" tooltip="parametr4 value" helptext="parametr4 value"/>
+					<Output5 type="string" defaultvalue="1" mandatory="false" tooltip="parametr5 value" helptext="parametr5 value"/>
+					<Output6 type="string" defaultvalue="1" mandatory="false" tooltip="parametr6 value" helptext="parametr6 value"/>
+					<Output7 type="string" defaultvalue="1" mandatory="false" tooltip="parametr7 value" helptext="parametr7 value"/>
+					<Output8 type="string" defaultvalue="1" mandatory="false" tooltip="parametr8 value" helptext="parametr8 value"/>
+				</ParReader>
+				<ParWriter type="Node" NumInputs="7" NumOutputs="1">
+					<Input1 type="int" defaultvalue="1" mandatory="false" tooltip="parametr1 value" helptext="parametr1 value"/>
+					<Input2 type="int" defaultvalue="1" mandatory="false" tooltip="parametr2 value" helptext="parametr2 value"/>
+					<Input3 type="int" defaultvalue="1" mandatory="false" tooltip="parametr3 value" helptext="parametr3 value"/>
+					<Input4 type="int" defaultvalue="1" mandatory="false" tooltip="parametr4 value" helptext="parametr4 value"/>
+					<Input5 type="int" defaultvalue="1" mandatory="false" tooltip="parametr5 value" helptext="parametr5 value"/>
+					<Input6 type="int" defaultvalue="1" mandatory="false" tooltip="parametr6 value" helptext="parametr6 value"/>
+					<Input7 type="int" defaultvalue="1" mandatory="false" tooltip="parametr7 value" helptext="parametr7 value"/>
+					<Output1 type="int" defaultvalue="1" mandatory="false" tooltip="file name to write parametrs" helptext="--"/>
+				</ParWriter>
+				<ImageReader type="Node" NumInputs="1" NumOutputs="1">
+					<Input1 type="string" defaultvalue="1" mandatory="true" tooltip="Reads the Images from the file " helptext="Reads DICOM/NIfTI/Analyze and xmlREC Images"/>
+					<Output1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="ImageC" helptext="ImageC"/>
+				</ImageReader>
+				<ImageWriter type="Node" NumInputs="2" NumOutputs="1"  tooltip="save ImageC" helptext="saves, NIfTI, Analyze and xmlREC Images">
+					<Input1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="Input image (type is ImageC)" helptext="Input image (type is ImageC)"/>
+					<Input2 type="Qvariant" defaultvalue="1" mandatory="false" tooltip="Header info image (type is ImageC)" helptext="Header info image (type is ImageC)"/>
+					<Output1 type="string" defaultvalue="1" mandatory="false" tooltip="Path to save Image (QString)" helptext="Path to save Image (QString)"/>
+				</ImageWriter>
+		</IO> 		
+		<Pipeline  type="Library"> 
+			<Divider type="Node" NumInputs="1" NumOutputs="3">
+				<Input1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="input data" helptext="data to be cloned"/>
+				<Output1 type="ImageC" defaultvalue="1" mandatory="true" tooltip="copy of the input" helptext="Cloned Image/data"/>
+				<Output2 type="ImageC" defaultvalue="1" mandatory="true" tooltip="copy of the input" helptext="Cloned Image/data"/>
+				<Output3 type="ImageC" defaultvalue="1" mandatory="true" tooltip="copy of the input" helptext="Cloned Image/data"/>
+			</Divider>
+			<Select type="Node" NumInputs="1" NumOutputs="1">
+				<Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="index_value" helptext="selects an element from the list with the given index_value"/>
+				<Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="data_value" helptext="the selected value from the list"/>
+			</Select>
+			<Systemcall type="Node" NumInputs="5" NumOutputs="3">
+				<Input1 type="Int" defaultvalue="1" mandatory="false" tooltip="input 1" helptext="input 1"/>
+				<Input2 type="Int" defaultvalue="1" mandatory="false" tooltip="input 2" helptext="input 2"/>
+				<Input3 type="Int" defaultvalue="1" mandatory="false" tooltip="input 3" helptext="input 3"/>
+				<Input4 type="Int" defaultvalue="1" mandatory="false" tooltip="input 4" helptext="input 4"/>
+				<Input5 type="Int" defaultvalue="1" mandatory="false" tooltip="input 5" helptext="input 5"/>
+				<Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="output 1" helptext="output 1"/>
+				<Output2 type="Int" defaultvalue="1" mandatory="false" tooltip="output 2" helptext="output 2"/>
+				<Output3 type="Int" defaultvalue="1" mandatory="false" tooltip="output 3" helptext="output 3"/>
+			</Systemcall>
+			<Develop type="Node" NumInputs="7" NumOutputs="7">
+				<Input1 type="Int" defaultvalue="1" mandatory="false" tooltip="input 1" helptext="input 1"/>
+				<Input2 type="Int" defaultvalue="1" mandatory="false" tooltip="input 2" helptext="input 2"/>
+				<Input3 type="Int" defaultvalue="1" mandatory="false" tooltip="input 3" helptext="input 3"/>
+				<Input4 type="Int" defaultvalue="1" mandatory="false" tooltip="input 4" helptext="input 4"/>
+				<Input5 type="Int" defaultvalue="1" mandatory="false" tooltip="input 5" helptext="input 5"/>
+				<Input6 type="Int" defaultvalue="1" mandatory="false" tooltip="input 6" helptext="input 6"/>
+				<Input7 type="Int" defaultvalue="1" mandatory="false" tooltip="input 7" helptext="input 7"/>
+				<Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="output 1" helptext="output 1"/>
+				<Output2 type="Int" defaultvalue="1" mandatory="false" tooltip="output 2" helptext="output 2"/>
+				<Output3 type="Int" defaultvalue="1" mandatory="false" tooltip="output 3" helptext="output 3"/>
+				<Output4 type="Int" defaultvalue="1" mandatory="false" tooltip="output 4" helptext="output 4"/>
+				<Output5 type="Int" defaultvalue="1" mandatory="false" tooltip="output 5" helptext="output 5"/>
+				<Output6 type="Int" defaultvalue="1" mandatory="false" tooltip="output 6" helptext="output 6"/>
+				<Output7 type="Int" defaultvalue="1" mandatory="false" tooltip="output 7" helptext="output 7"/>
+			</Develop>
+			<Branch type="Node" NumInputs="2" NumOutputs="2">
+                                <Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="Input to be diverted" helptext="Input to be diverted"/>
+				<Input2 type="Int" defaultvalue="1" mandatory="true" tooltip="condition1" helptext="condition1"/>
+				<Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="if conditional == 1" helptext="output will be port 1"/>
+				<Output2 type="Int" defaultvalue="1" mandatory="false" tooltip="if conditional == 0" helptext="output will be port 2"/>
+			</Branch>
+                        <Synch type="Node" NumInputs="3" NumOutputs="3">
+                                <Input1 type="Int" defaultvalue="1" mandatory="false" tooltip="Input1" helptext="Input1"/>
+                                <Input2 type="Int" defaultvalue="1" mandatory="false" tooltip="Input2" helptext="Input2"/>
+                                <Input2 type="Int" defaultvalue="1" mandatory="false" tooltip="Input3" helptext="Input3"/>
+                                <Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="O1" helptext="output will be port 1"/>
+                                <Output2 type="Int" defaultvalue="1" mandatory="false" tooltip="O2" helptext="output will be port 2"/>
+                                <Output3 type="Int" defaultvalue="1" mandatory="false" tooltip="O3" helptext="output will be port 3"/>
+                        </Synch>
+                        <Delay type="Node" NumInputs="1" NumOutputs="1">
+				<Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="delay time" helptext="the amount of time to be delayed"/>
+				<Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="prosses to be done after the delay time" helptext="prosses to be done after the delay time"/>
+			</Delay>
+			<End type="Node" NumInputs="1" NumOutputs="0">
+				<Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="exit/stop/pause" helptext="exit/stop/pause"/>				
+			</End>
+			<Loop type="Node" NumInputs="3" NumOutputs="2">
+				<Input1 type="Int" defaultvalue="1" mandatory="false" tooltip="NEXT" helptext="NEXT"/>
+				<Input2 type="Int" defaultvalue="1" mandatory="false" tooltip="RESET" helptext="RESET"/>
+				<Input3 type="Int" defaultvalue="1" mandatory="false" tooltip="STOP" helptext="STOP"/>
+				<Output1 type="Int" defaultvalue="1" mandatory="false" tooltip="counter_value" helptext="counter_value"/>
+				<Output2 type="Int" defaultvalue="1" mandatory="false" tooltip="end_value" helptext="end_value"/>
+			</Loop>
+		</Pipeline>
+	</GRAPE>
+	<USERS type="Library">
+		<User1 type="Library">
+			<User1Lib1 type="Library">
+				<End type="Node" NumInputs="1" NumOutputs="0">
+					<Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="exit/stop/pause" helptext="exit/stop/pause"/>				
+				</End>
+			</User1Lib1>
+			<End type="Node" NumInputs="1" NumOutputs="0">
+				<Input1 type="Int" defaultvalue="1" mandatory="true" tooltip="exit/stop/pause" helptext="exit/stop/pause"/>				
+			</End>
+		</User1>
+		<User2 type="Library">
+		</User2>
+	</USERS>
+</NodeLibraries>

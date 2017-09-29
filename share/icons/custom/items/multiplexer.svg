@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="64" height="64" version="1.1" viewBox="-216 -216 432 432" xmlns="http://www.w3.org/2000/svg">
+
+<g style="stroke-width: 32; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; fill: none">
+    <path d="M -100 -200 V 200 L 100 100 V -100 L -100 -200  M -200 -100 H -100 M -200 100 H -100 M 100 0 H 200" />
+</g>
+
+</svg>

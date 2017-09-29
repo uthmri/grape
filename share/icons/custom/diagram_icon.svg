@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+              "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="128" height="128" viewBox="0 0 128 128" version="1.1"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<defs>
+    <filter id="MyFilter">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+        <feOffset in="blur" dx="4" dy="4" result="offsetBlur"/>
+        
+        <feSpecularLighting in="blur" surfaceScale="5" specularConstant="1" 
+            specularExponent="10" lighting-color="white" result="specOut">
+            <fePointLight x="-5000" y="-10000" z="20000"/>
+        </feSpecularLighting>
+        
+        <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+        <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" 
+            k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+        
+        <feMerge>
+            <feMergeNode in="offsetBlur"/>
+            <feMergeNode in="litPaint"/>
+        </feMerge>
+    </filter>
+</defs>
+
+<circle filter="url(#MyFilter)" cx="64" cy="64" r="52" fill="rgb(96,96,96)"/>
+
+<path d="M80,88 L88,80 L92,92 z" fill="#001100"/>
+<path d="M76,88 L88,76 L52,40 L40,52 z" fill="#001100"/>
+<path d="M40,48 L48,40 L40,32 L32,40 z" fill="#001100"/>
+
+</svg>

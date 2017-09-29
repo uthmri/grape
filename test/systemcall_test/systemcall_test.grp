@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram width="10000" height="7500" units="0" borderWidth="24" grid="100" alignment="132" viewportAnchor="2" selectionMode="2" forceItemsInside="true" gridStyle="3" majorGridSpacing="8" minorGridSpacing="2">
+	<items>
+		<Systemcall ItemNumber="0" x="3500" y="2200" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#ffffffff" Command="mkdir" Arg1Port="I1" Arg1="" Arg2Port="none" Arg2="" Arg3Port="none" Arg3="" Arg4Port="none" Arg4="" Arg5Port="none" Arg5="" Output1Port="I1" Output1="" Output2Port="none" Output2="" Output3Port="none" Output3="" caption="systemcal-1l: mkdir" font="Arial Black,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2100" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2100" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1050" y="0" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="2100" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="1050" y="400" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="0" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="76.4569" y="125.079" width="8" height="8" flags="11" category="0" connections="4,1"/>
+			<itemPoint x="462.848" y="34.1925" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="1050" y="1.98952e-13" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="1637.15" y="34.1925" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="2023.54" y="125.079" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="172.738" y="309.902" width="8" height="8" flags="19" category="0" connections="6,0"/>
+			<itemPoint x="1050" y="400" width="8" height="8" flags="19" category="0"/>
+			<itemPoint x="1927.26" y="309.902" width="8" height="8" flags="19" category="0"/>
+			<itemPoint x="400" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="400" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="400" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="400" y="200" width="8" height="8" flags="4" category="0"/>
+		</Systemcall>
+		<Source ItemNumber="1" x="1200" y="2400" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#00000000" DataType="string" DataValue="../test/systemcall_test/output.txt" Array="false" Dimension1="0" Dimension2="0" Dimension3="0" Dimension4="0" caption="source 2 = &quot; output.txt &quot;" font="DejaVu Sans,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2000" y="500" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2000" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="500" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1000" y="0" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="2000" y="250" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="1000" y="500" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="0" y="250" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="1000" y="500" width="8" height="8" flags="19" category="0" connections="3,0"/>
+			<itemPoint x="1707.11" y="73.2233" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="1707.11" y="426.777" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="292.893" y="426.777" width="8" height="8" flags="4" category="0"/>
+		</Source>
+		<Source ItemNumber="2" x="2600" y="1500" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#00000000" DataType="string" DataValue="..\test\systemcall_test\TestDir" Array="false" Dimension1="0" Dimension2="0" Dimension3="0" Dimension4="0" caption="source 1 = &quot; TestDi &quot;" font="DejaVu Sans,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1700" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1700" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="850" y="0" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="1700" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="850" y="400" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="0" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="850" y="400" width="8" height="8" flags="19" category="0" connections="4,0"/>
+			<itemPoint x="1451.04" y="58.5786" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="1451.04" y="341.421" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="248.959" y="341.421" width="8" height="8" flags="4" category="0"/>
+		</Source>
+		<line ItemNumber="3" x="2200" y="2900" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="1,8"/>
+			<itemPoint x="1098.71" y="90.0982" width="8" height="8" flags="7" category="0" connections="15,8"/>
+			<itemPoint x="549.354" y="45.0491" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<line ItemNumber="4" x="3450" y="1900" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="2,8"/>
+			<itemPoint x="126.457" y="425.079" width="8" height="8" flags="7" category="0" connections="0,8"/>
+			<itemPoint x="63.2285" y="212.54" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<Systemcall ItemNumber="5" x="3400" y="3600" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#ffffffff" Command="move" Arg1Port="I1" Arg1="" Arg2Port="fixed" Arg2="C:\Xiaojun_dir\Qt_creator_program\GRAPE\test\systemcall_test\TestDir\output.txt" Arg3Port="none" Arg3="" Arg4Port="none" Arg4="" Arg5Port="none" Arg5="" Output1Port="none" Output1="" Output2Port="none" Output2="" Output3Port="none" Output3="" caption="systemcall-2: move" font="Arial Black,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2200" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2200" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1100" y="0" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="2200" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="1100" y="400" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="0" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="80.0977" y="125.079" width="8" height="8" flags="11" category="0" connections="14,1"/>
+			<itemPoint x="484.888" y="34.1925" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="1100" y="1.98952e-13" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="1715.11" y="34.1925" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="2119.9" y="125.079" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="180.963" y="309.902" width="8" height="8" flags="19" category="0"/>
+			<itemPoint x="1100" y="400" width="8" height="8" flags="19" category="0" connections="9,0"/>
+			<itemPoint x="2019.04" y="309.902" width="8" height="8" flags="19" category="0"/>
+			<itemPoint x="600" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="600" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="600" y="200" width="8" height="8" flags="4" category="0"/>
+			<itemPoint x="600" y="200" width="8" height="8" flags="4" category="0"/>
+		</Systemcall>
+		<line ItemNumber="6" x="3672.74" y="2509.9" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="0,13"/>
+			<itemPoint x="127.26" y="390.1" width="8" height="8" flags="7" category="0" connections="15,9"/>
+			<itemPoint x="63.63" y="195.05" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<Source ItemNumber="7" x="2300" y="4100" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#ffffffff" DataType="string" DataValue="123" Array="false" Dimension1="0" Dimension2="0" Dimension3="0" Dimension4="0" caption="source3 = &quot; 123 &quot;" font="Arial Black,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1600" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1600" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="800" y="0" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="1600" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="800" y="400" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="0" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="800" y="400" width="8" height="8" flags="19" category="0" connections="10,0"/>
+			<itemPoint x="1365.69" y="58.5786" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="1365.69" y="341.421" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="234.315" y="341.421" width="8" height="8" flags="0" category="0"/>
+		</Source>
+		<Sink ItemNumber="8" x="3300" y="5400" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#ffffffff" OutputType="WritetoFile" FilePath="../test/systemcall_test/output.txt" caption="sink: write output.txt" font="DejaVu Sans,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2000" y="500" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="2000" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="500" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1000" y="0" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="2000" y="250" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="1000" y="500" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="0" y="250" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="1000" y="2.55795e-13" width="8" height="8" flags="11" category="0" connections="11,1"/>
+			<itemPoint x="1000" y="500" width="8" height="8" flags="19" category="0" connections="13,0"/>
+			<itemPoint x="1707.11" y="426.777" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="292.893" y="426.777" width="8" height="8" flags="0" category="0"/>
+		</Sink>
+		<line ItemNumber="9" x="4500" y="4000" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="5,14"/>
+			<itemPoint x="-250" y="500" width="8" height="8" flags="7" category="0" connections="16,9"/>
+			<itemPoint x="-125" y="250" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<line ItemNumber="10" x="3100" y="4500" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="7,8"/>
+			<itemPoint x="690.482" y="90.0982" width="8" height="8" flags="7" category="0" connections="16,8"/>
+			<itemPoint x="345.241" y="45.0491" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<line ItemNumber="11" x="3790.48" y="4809.9" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="16,11"/>
+			<itemPoint x="509.52" y="590.1" width="8" height="8" flags="7" category="0" connections="8,8"/>
+			<itemPoint x="254.76" y="295.05" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<End ItemNumber="12" x="3900" y="6200" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#ffffffff" EndType="Exit" caption="End" font="Arial Black,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="800" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="800" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="400" y="0" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="800" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="400" y="400" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="0" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="400" y="1.9984e-13" width="8" height="8" flags="11" category="0" connections="13,1"/>
+			<itemPoint x="682.843" y="58.5786" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="682.843" y="341.421" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="117.157" y="341.421" width="8" height="8" flags="0" category="0"/>
+		</End>
+		<line ItemNumber="13" x="4300" y="5900" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="8,9"/>
+			<itemPoint x="0" y="300" width="8" height="8" flags="7" category="0" connections="12,8"/>
+			<itemPoint x="0" y="150" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<line ItemNumber="14" x="3298.71" y="3209.9" units="0" flags="4111" placeType="1" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" startArrow="0,100" endArrow="0,100">
+			<itemPoint x="0" y="0" width="8" height="8" flags="7" category="0" connections="15,11"/>
+			<itemPoint x="181.393" y="515.175" width="8" height="8" flags="7" category="0" connections="5,8"/>
+			<itemPoint x="90.6963" y="257.588" width="8" height="8" flags="2" category="0"/>
+		</line>
+		<Synch ItemNumber="15" x="3200" y="2900" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#000000ff" caption="Synch 1" font="DejaVu Sans,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1200" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1200" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="600" y="0" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="1200" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="600" y="400" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="0" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="98.7074" y="90.0982" width="8" height="8" flags="11" category="0" connections="3,1"/>
+			<itemPoint x="600" y="1.98952e-13" width="8" height="8" flags="11" category="0" connections="6,1"/>
+			<itemPoint x="1101.29" y="90.0982" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="98.7074" y="309.902" width="8" height="8" flags="19" category="0" connections="14,0"/>
+			<itemPoint x="600" y="400" width="8" height="8" flags="19" category="0"/>
+			<itemPoint x="1101.29" y="309.902" width="8" height="8" flags="19" category="0"/>
+		</Synch>
+		<Synch ItemNumber="16" x="3700" y="4500" units="0" flags="4111" placeType="0" visible="true" rotationAngle="0" flipped="false" pen="#ff000000,12,1,32,128" brush="#000000ff" caption="Synch 2" font="Arial Black,150,false,false,false,false,false,0" textBrush="#ff000000">
+			<itemPoint x="0" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1100" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="1100" y="0" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="0" y="400" width="8" height="8" flags="1" category="0"/>
+			<itemPoint x="550" y="0" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="1100" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="550" y="400" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="0" y="200" width="8" height="8" flags="0" category="0"/>
+			<itemPoint x="90.4817" y="90.0982" width="8" height="8" flags="11" category="0" connections="10,1"/>
+			<itemPoint x="550" y="1.98952e-13" width="8" height="8" flags="11" category="0" connections="9,1"/>
+			<itemPoint x="1009.52" y="90.0982" width="8" height="8" flags="11" category="0"/>
+			<itemPoint x="90.4817" y="309.902" width="8" height="8" flags="19" category="0" connections="11,0"/>
+			<itemPoint x="550" y="400" width="8" height="8" flags="19" category="0"/>
+			<itemPoint x="1009.52" y="309.902" width="8" height="8" flags="19" category="0"/>
+		</Synch>
+	</items>
+</diagram>

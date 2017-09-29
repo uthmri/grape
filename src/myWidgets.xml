@@ -1,0 +1,5 @@
+<Widgets>  
+  <MyTableWidget 	id="widget1" width="100px" height="100px"></MyTableWidget>  
+  <MyListWidget 	id="widget2" width="100px" height="100px"></MyListWidget>
+  <MyTabWidget 		id="widget3" width="100px" height="100px"></MyTabWidget>  
+</Widgets>
