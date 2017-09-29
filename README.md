@@ -3,7 +3,7 @@ GRAPE is a **GRA**phical **P**ipeline **E**nvironment for image analysis in adap
 See our publication here: <https://dx.doi.org/10.1007/s11548-016-1495-z>
 
 ## **MANUAL**
-[Download here](doc/GRAPE_Manual.docx)
+[Download here](https://github.com/rgabr/grape/raw/master/doc/GRAPE_Manual.docx)
 
 ## **RELEASE NOTES**
 Please see [RELEASE](RELEASE.md)
