@@ -162,6 +162,13 @@ int ImageRegistration::execute()
     QString baseName =  info1.baseName();
     baseNamePath =directory+ "/"+ baseName;
 
+
+    qDebug() <<"Out_Image_Path = " <<Out_Image_Path;
+    qDebug() <<"baseName = " <<baseName;
+    qDebug() <<"directory = " <<directory;
+    qDebug() <<"baseNamePath = " <<baseNamePath;
+    //return -1;
+
     if(nodeItem->containsProperty("Param1"))
     {
         param1 = nodeItem->propertyValue("Param1").toString();
@@ -187,7 +194,9 @@ int ImageRegistration::execute()
             qDebug() << "command1 =" << command1;
             system(command1.toUtf8());
 
-            QString command2 = commandPath +"/WarpImageMultiTransform 3 "+ Moving_Image_Path+ ' '+ Out_Image_Path+ ' ' + baseNamePath + "Affine.txt  -R"+ ' '+ Fixed_Image_Path;
+//            QString command2 = commandPath +"/WarpImageMultiTransform 3 "+ Moving_Image_Path+ ' '+ Out_Image_Path+ ' ' + baseNamePath + "Affine.txt  -R"+ ' '+ Fixed_Image_Path;
+            QString command2 = commandPath +"/WarpImageMultiTransform 3 "+ Moving_Image_Path+ ' '+ Out_Image_Path+ " -R " + Fixed_Image_Path + ' ' + baseNamePath + "Affine.txt";
+
             qDebug() << "command2 =" << command2;
             system(command2.toUtf8());
 
@@ -235,7 +244,8 @@ int ImageRegistration::execute()
             qDebug() << "command1 =" << command1;
             system(command1.toUtf8());
 
-            QString command2 = commandPath +"/WarpImageMultiTransform 3 "+ Moving_Image_Path+ ' '+ Out_Image_Path+ ' ' + baseNamePath + "Affine.txt  -R " + Fixed_Image_Path;
+           // QString command2 = commandPath +"/WarpImageMultiTransform 3 "+ Moving_Image_Path+ ' '+ Out_Image_Path+ ' ' + baseNamePath + "Affine.txt  -R " + Fixed_Image_Path;
+            QString command2 = commandPath +"/WarpImageMultiTransform 3 "+ Moving_Image_Path+ ' '+ Out_Image_Path+ " -R " + Fixed_Image_Path + ' ' + baseNamePath + "Affine.txt";
             qDebug() << "command2 =" << command2;
             system(command2.toUtf8());
 
@@ -367,6 +377,17 @@ int ImageRegistration::validateDesign()
         qDebug() << "Cannot find path to ANTS";
         return -1;
     }
+
+
+    Out_Image_Path = nodeItem->propertyValue("OutputPath").toString();
+
+    if(Out_Image_Path.length()<1)
+    {
+        qDebug() << "ERROR: empty output file";
+        return -1;
+    }
+
+
     return 0;
 }
 //--------------------------------------------------------------------------------------------------

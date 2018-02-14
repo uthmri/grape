@@ -53,22 +53,6 @@ protected:
     image::basic_image<short,3> image_data6;
     image::basic_image<short,3> image_data7;
 
-    struct MP2RAGE_PARS
-    {
-        float a1 = 7;      // flip angle of 1st image
-        float a2 = 5;      // flip angle of 2nd image
-        int np = 240;                // number of pulses; turbo factor; ETL
-        int n_startup = 20;         // TFE startup pulses
-        float TR_PSIR = 4500;         // cycle time = time between two inversion pulses
-        float TR = 8.13;              // readout repeatition time
-        float TE = 3.75;              // readout echo time
-        float TI1 = 500;              // first TI
-        float TI2 = 2600;             // value discarded; second TI is automatically calculated
-        float eff = 0.96;             // efficiency of inversion pulse
-        float T1_clip_u = 10000;
-        float T1_clip_l = 0;
-    }
-    mp2rage_pars;
 
 protected:
     virtual QVariant* get_output_by_index(int out_id);
@@ -96,8 +80,6 @@ public:
    virtual int  gaussfunc(int m, int n, double *p, double *dy, double **dvec, void *vars);
    //int T1func(int m, int n, double *p, double *dy, double **dvec, void *vars);
    virtual double gNoise(double m, double s);
-   void mp2rage_lut_calc(float LUT[],MP2RAGE_PARS p);
-
 
     virtual QString uniqueKey() const;
 

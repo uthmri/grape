@@ -82,9 +82,7 @@ void ImageProcessing::set_input_by_index(int in_id, QVariant* varvalue)
         }
         arg2_type = arg_type;
         src_assigned[in_id] = true;
-        //qDebug()<<"$$$$$$$$$-0  arg1_type="<<arg1_type<<", arg2_type="<<arg2_type;
     }
-    //qDebug()<<"$$$$$$$$$-1  arg1_type="<<arg1_type<<", arg2_type="<<arg2_type;
 }
 //--------------------------------------------------------------------------------------------------
 QVariant* ImageProcessing::get_output(int out_port_id)
@@ -100,7 +98,6 @@ QVariant* ImageProcessing::get_output_by_index(int out_id)
 int ImageProcessing::execute()
 {
     clearOutputData();
-    qDebug() << "in ImageProcessing::execute()" ;
 
     int numberconnected = Node::getConnectedInPorts().length();
 
@@ -118,7 +115,7 @@ int ImageProcessing::execute()
         out_fname2 = nodeItem->propertyValue("Output2").toString();
 
     QString ImageProcessingType = nodeItem->propertyValue("ImageProcessingType").toString();
-    qDebug() << "ImageProcessingType =" << ImageProcessingType;
+    // qDebug() << "ImageProcessingType =" << ImageProcessingType;
 
 
     // op_arg_type:
@@ -135,62 +132,50 @@ int ImageProcessing::execute()
 
     //qDebug()<<"$$$$$$$$$-2  arg1_type="<<arg1_type<<", arg2_type="<<arg2_type;
     int MaxNumDimensions, isz[3], risz[3];
+
     if(arg1_type == 0)
     {
         MaxNumDimensions = im1->NumDimensions;
-//        isz[0] =im1->array_size[0];
-//        isz[1] =im1->array_size[1];
-//        isz[2] =im1->array_size[2];
-        for(int i=0; i<3; i++) isz[i]=im1->array_size[i];//image size
+        for(int i=0; i<MaxNumDimensions; i++)
+            isz[i] = im1->array_size[i];//image size
+
+        qDebug() << " Input image NumDimensions = " << QString::number(im1->NumDimensions);
+        qDebug() << " Input image Dimensions = " << QString::number(isz[0]) << " x " << QString::number(isz[1]) << " x " << QString::number(isz[2]) << " x " << QString::number(isz[3]);
 
     }
     else if(arg2_type == 0)
     {
         if(src_assigned[1]){
             MaxNumDimensions = im2->NumDimensions;
-            isz[0] =im2->array_size[0];
-            isz[1] =im2->array_size[1];
-            isz[2] =im2->array_size[2];
-            for(int i=0; i<3; i++) isz[i]=im1->array_size[i];//image size
+            for(int i=0; i<MaxNumDimensions; i++)
+                isz[i] = im2->array_size[i];//image size
         }
     }
     else
+    {
         MaxNumDimensions = 1;
-
+    }
 
     XMLRecReader X;
-
-    // FIRST COPY DATA TO IMAGE OBJECT
     float iMax = X.imageMaxValue(im1);
     float iMin = X.imageMinValue(im1);
 
+    // FIRST COPY DATA TO IMAGE OBJECT
     image::basic_image<float,3>  I3(image::geometry<3>(isz[0],isz[1],isz[2]));
-    image::basic_image<float,3>  I3_2(image::geometry<3>(im1->array_size[0],im1->array_size[1],im1->array_size[2]));
     image::basic_image<int,3>  L3(image::geometry<3>(isz[0],isz[1],isz[2]));
     image::basic_image<float,2>  I2(image::geometry<2>(isz[0],isz[1]));
-    image::basic_image<float,2>  I2_2(image::geometry<2>(im1->array_size[0],im1->array_size[1]));
     image::basic_image<int,2>  L2(image::geometry<2>(isz[0],isz[1]));
 
     if (im1->NumDimensions == 3)
     {
-        //result = new ImageC(im1);
-
         for(int z=0; z<im1->array_size[2]; z++)
             for(int y=0; y<im1->array_size[1]; y++)
                 for(int x=0; x<im1->array_size[0]; x++)
                     I3.at(x,y,z) = im1->getVoxel(x,y,z);
 
-        if(src_assigned[1]){
-            for(int z=0; z<im2->array_size[2]; z++)
-                for(int y=0; y<im2->array_size[1]; y++)
-                    for(int x=0; x<im2->array_size[0]; x++)
-                        I3_2.at(x,y,z) = im2->getVoxel(x,y,z);
-        }
-
     }
     else if (im1->NumDimensions==2)
     {
-        result = new ImageC(im1);
         for(int y=0; y<im1->array_size[1]; y++)
             for(int x=0; x<im1->array_size[0]; x++)
                 I2.at(x,y) = im1->getVoxel(x,y);
@@ -264,13 +249,22 @@ int ImageProcessing::execute()
         }
         else if(op == QString("resample: down_sample"))
         {
-            for(int i=0; i<3; i++) risz[i]=isz[i]/2;//resampled image size
-            for(int i=0; i<3; i++) rvsz[i]=im1->voxel_size[i]*2;//resampled image voxel size
+            for(int i=0; i<3; i++) risz[i] = isz[i]/2;//resampled image size
+            for(int i=0; i<3; i++) rvsz[i] = im1->voxel_size[i]*2;//resampled image voxel size
         }
         else if(op == QString("resample: up_sample"))
         {
-            for(int i=0; i<3; i++) risz[i]=isz[i]*2;//resampled image size
-            for(int i=0; i<3; i++) rvsz[i]=im1->voxel_size[i]/2;//resampled image voxel size
+            for(int i=0; i<3; i++) risz[i] = isz[i]*2;//resampled image size
+            for(int i=0; i<3; i++) rvsz[i] = im1->voxel_size[i]/2;//resampled image voxel size
+        }
+        else if(op == QString("resample: zero_pad"))
+        {
+            int Npts = 3;
+            float* x = new float[Npts];
+            readArgDataArray<float>(x, Npts, "Arg1");
+
+            for(int i=0; i<3; i++) risz[i] = x[i]; //new image size
+            for(int i=0; i<3; i++) rvsz[i] = im1->voxel_size[i];
         }
         else if(op == QString("segment: stochastic competition"))
         {
@@ -355,32 +349,59 @@ int ImageProcessing::execute()
         }
         else if(op == QString("resample: down_sample"))
         {
-            for(int i=0; i<2; i++) risz[i]=isz[i]/2;//resampled image size
-            for(int i=0; i<2; i++) rvsz[i]=im1->voxel_size[i]*2;//resampled image voxel size
+            for(int i=0; i<2; i++) risz[i] = isz[i]/2;//resampled image size
+            for(int i=0; i<2; i++) rvsz[i] = im1->voxel_size[i]*2;//resampled image voxel size
         }
         else if(op == QString("resample: up_sample"))
         {
-            for(int i=0; i<2; i++) risz[i]=isz[i]*2;//resampled image size
-            for(int i=0; i<2; i++) rvsz[i]=im1->voxel_size[i]/2;//resampled image voxel size
+            for(int i=0; i<2; i++) risz[i] = isz[i]*2;//resampled image size
+            for(int i=0; i<2; i++) rvsz[i] = im1->voxel_size[i]/2;//resampled image voxel size
+        }
+        else if(op == QString("resample: zero_pad"))
+        {
+            int Npts = 2;
+            float* x = new float[Npts];
+            readArgDataArray<float>(x, Npts, "Arg1");
+
+            for(int i=0; i<2; i++) risz[i] = x[i]; //new image size
+            for(int i=0; i<2; i++) rvsz[i] = im1->voxel_size[i]; //resampled image voxel size
         }
     }
 
     // FINALLY COPY BACK TO ImageC
     if (im1->NumDimensions == 3)
     {
+        qDebug() << "++++++++++++++++++++ 1";
         result = new ImageC(im1);
+        qDebug() << "++++++++++++++++++++ 2";
+
         if ((op == QString("resample: up_sample"))||(op == QString("resample: down_sample")))
         {
-            image::basic_image<short,3> resamp_im;
+            image::basic_image<float,3> resamp_im;
             resamp_im.resize(image::geometry<3>(risz[0],risz[1],risz[2]));
             resample_linear(I3,resamp_im);
             //image::upsample_with_padding(I3,resamp_im,image::geometry<3>(risz[0],risz[1],rsz22));
             //image::downsample_with_padding(I3,resamp_im);
 
             result->data.resize(risz[0]*risz[1]*risz[2]);
-            for(int i=0; i<3; i++) result->array_size[i]=risz[i];
-            for(int i=0; i<3; i++) result->voxel_size[i]=rvsz[i];
+            for(int i=0; i<3; i++) result->array_size[i] = risz[i];
+            for(int i=0; i<3; i++) result->voxel_size[i] = rvsz[i];
             std::copy(resamp_im.begin(), resamp_im.end(), result->data.begin());
+        }
+        else if (op == QString("resample: zero_pad"))
+        {
+            for(int i=0; i<3; i++) result->array_size[i] = risz[i];
+            for(int i=0; i<3; i++) result->voxel_size[i] = rvsz[i];
+
+            qDebug() << " x " << QString::number(risz[0]) << " x " << QString::number(risz[1]) << " x " << QString::number(risz[2]);
+
+            result->data.resize(risz[0]*risz[1]*risz[2]);
+            std::fill(result->data.begin(), result->data.end(), 0.0);
+
+            for(int z=0; z<std::min(risz[2],im1->array_size[2]); z++)
+                for(int y=0; y<std::min(risz[1],im1->array_size[1]); y++)
+                    for(int x=0; x<std::min(risz[0],im1->array_size[0]); x++)
+                        result->setVoxel(im1->getVoxel(x,y,z), x, y, z);
         }
         else
             std::copy(I3.begin(), I3.end(), result->data.begin());
@@ -390,21 +411,35 @@ int ImageProcessing::execute()
         result = new ImageC(im1);
         if ((op == QString("resample: up_sample"))||(op == QString("resample: down_sample")))
         {
-            image::basic_image<short,2> resamp_im;
+            image::basic_image<float,2> resamp_im;
             resamp_im.resize(image::geometry<2>(risz[0],risz[1]));
             resample_linear(I2,resamp_im);
             //image::upsample_with_padding(I3,resamp_im,image::geometry<2>(risz[0],risz[1]));
             //image::downsample_with_padding(I3,resamp_im);
 
             result->data.resize(risz[0]*risz[1]);
-            for(int i=0; i<2; i++) result->array_size[i]=risz[i];
-            for(int i=0; i<2; i++) result->voxel_size[i]=rvsz[i];
+            for(int i=0; i<2; i++) result->array_size[i] = risz[i];
+            for(int i=0; i<2; i++) result->voxel_size[i] = rvsz[i];
             std::copy(resamp_im.begin(), resamp_im.end(), result->data.begin());
+        }
+        else if (op == QString("resample: zero_pad"))
+        {
+            for(int i=0; i<2; i++) result->array_size[i] = risz[i];
+            for(int i=0; i<2; i++) result->voxel_size[i] = rvsz[i];
+
+            result->data.resize(risz[0]*risz[1]);
+            std::fill(result->data.begin(), result->data.end(), 0.0);
+
+            for(int y=0; y<std::min(risz[1],im1->array_size[1]); y++)
+                for(int x=0; x<std::min(risz[0],im1->array_size[0]); x++)
+                    result->setVoxel(im1->getVoxel(x,y), x, y);
         }
         else
             std::copy(I2.begin(), I2.end(), result->data.begin());
-
     }
+
+    I3.clear();        L3.clear();
+    I2.clear();        L3.clear();
 
     output_found = true;
 
@@ -415,6 +450,8 @@ int ImageProcessing::execute()
     else
         qv->setValue(result);
     outData.push_back(qv);
+
+
 
     setReadyOutPorts(8 + getNi().NumInputs + 0, output_found);
     markExecuted();
@@ -458,5 +495,21 @@ bool ImageProcessing::isSuperfluous() const
 //--------------------------------------------------------------------------------------------------
 void ImageProcessing::setConnectedInPorts()
 {
+}
+//--------------------------------------------------------------------------------------------------
+template <class T>
+void ImageProcessing::readArgDataArray(T x[], int Npts, QString arg)
+{
+    if (Npts > 1)
+    {
+        QString xDattaValues = nodeItem->propertyValue(arg).toString();
+        QStringList xDattaList = xDattaValues.split(',');
+        for(int ii=0; ii< Npts; ii++) x[ii] = (T)(xDattaList[ii].toDouble());
+    }
+    else
+    {
+        qDebug() << "Error: in readArgDataArray, Npst should > 1 for T1-IR.";
+        return;
+    }
 }
 //--------------------------------------------------------------------------------------------------

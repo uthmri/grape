@@ -8,7 +8,7 @@ See our publication here: <https://dx.doi.org/10.1007/s11548-016-1495-z>
 [Download v0.1 tar.gz](https://github.com/rgabr/grape/archive/v0.1.tar.gz)
 
 ## **MANUAL**
-[Download here](https://github.com/rgabr/grape/raw/master/doc/GRAPE_Manual.docx)
+[Download here](https://bitbucket.org/rgabr/grape/raw/cf84c06db195d65dace9a749445a08ac85b3d3de/doc/GRAPE_Manual.docx)
 
 ## **RELEASE NOTES**
 Please see [RELEASE](RELEASE.md)

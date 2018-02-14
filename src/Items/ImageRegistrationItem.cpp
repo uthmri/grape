@@ -29,8 +29,8 @@ ImageRegistrationItem::ImageRegistrationItem(const NodeInterface &NI) : NodeItem
     addProperty("Work Model", QVariant(QString("Estimate & Reslice")));//<<<<<<<<<<<<<<
     addProperty("Registration Method", QVariant(QString("Affine")));
     addProperty("Similarity Measure", QVariant(QString("MI")));//<<<<<<<<<<<<<<
-    addProperty("CommandPath1", QVariant(QString("/ANTS/")));
-    addProperty("CommandPath2", QVariant(QString("/ANTS/WarpImageMultiTransform")));
+    addProperty("CommandPath", QVariant(QString("/ANTS/")));
+//    addProperty("CommandPath2", QVariant(QString("/ANTS/WarpImageMultiTransform")));
     addProperty("Param1", QVariant(QString("")));
     addProperty("Param2", QVariant(QString("")));
     addProperty("OutputPath", QVariant(QString("")));
@@ -72,15 +72,15 @@ void ImageRegistrationItem::setRegistrationWorkModel(const QString& registration
 }
 
 //--------------------------------------------------------------------------------------------------
-void ImageRegistrationItem::setCommandPath1(const QString& commandPath1)
+void ImageRegistrationItem::setCommandPath(const QString& commandPath1)
 {
-    setPropertyValue("CommandPath1", QVariant(commandPath1));
+    setPropertyValue("CommandPath", QVariant(commandPath1));
 }
 //--------------------------------------------------------------------------------------------------
-void ImageRegistrationItem::setCommandPath2(const QString& commandPath2)
-{
-    setPropertyValue("CommandPath2", QVariant(commandPath2));
-}
+//void ImageRegistrationItem::setCommandPath2(const QString& commandPath2)
+//{
+//    setPropertyValue("CommandPath2", QVariant(commandPath2));
+//}
 //--------------------------------------------------------------------------------------------------
 //void ImageRegistrationItem::setFixedImagePort(const QString& fixedImagePort)
 //{
@@ -146,15 +146,15 @@ QString ImageRegistrationItem::registrationWorkModel() const
     return propertyValue("Work Model").toString();
 }
 //--------------------------------------------------------------------------------------------------
-QString ImageRegistrationItem::commandPath1() const
+QString ImageRegistrationItem::commandPath() const
 {
-    return propertyValue("CommandPath1").toString();
+    return propertyValue("CommandPath").toString();
 }
 //--------------------------------------------------------------------------------------------------
-QString ImageRegistrationItem::commandPath2() const
-{
-    return propertyValue("CommandPath2").toString();
-}
+//QString ImageRegistrationItem::commandPath2() const
+//{
+//    return propertyValue("CommandPath2").toString();
+//}
 //--------------------------------------------------------------------------------------------------
 QString ImageRegistrationItem::param1() const
 {
@@ -266,8 +266,8 @@ void ImageRegistrationItem::writeXmlAttributes(QXmlStreamWriter& xmlWriter, cons
     xmlWriter.writeAttribute("WorkModel", registrationWorkModel());
     xmlWriter.writeAttribute("RegistrationMethod", imageRegistrationType());
     xmlWriter.writeAttribute("SimilarityMeasure", imageSimilarityMeasure());
-    xmlWriter.writeAttribute("CommandPath1", commandPath1());
-    xmlWriter.writeAttribute("CommandPath2", commandPath2());
+    xmlWriter.writeAttribute("CommandPath", commandPath());
+//    xmlWriter.writeAttribute("CommandPath2", commandPath2());
     xmlWriter.writeAttribute("Param1", param1());
     xmlWriter.writeAttribute("Param2", param2());
     xmlWriter.writeAttribute("OutputPath", outputPath());
@@ -289,10 +289,10 @@ void ImageRegistrationItem::readXmlAttributes(QXmlStreamReader& xmlReader, const
         setImageRegistrationType(attributes.value("RegistrationMethod").toString());
     if (attributes.hasAttribute("SimilarityMeasure"))
         setImageSimilarityMeasure(attributes.value("SimilarityMeasure").toString());
-    if (attributes.hasAttribute("CommandPath1"))
-        setCommandPath1(attributes.value("CommandPath1").toString());
-    if (attributes.hasAttribute("CommandPath2"))
-        setCommandPath2(attributes.value("CommandPath2").toString());
+    if (attributes.hasAttribute("CommandPath"))
+        setCommandPath(attributes.value("CommandPath").toString());
+//    if (attributes.hasAttribute("CommandPath2"))
+//        setCommandPath2(attributes.value("CommandPath2").toString());
     if (attributes.hasAttribute("Param1"))
         setParam1(attributes.value("Param1").toString());
     if (attributes.hasAttribute("Param2"))
@@ -404,8 +404,8 @@ ImageRegistrationItemDialog::ImageRegistrationItemDialog(QWidget* parent) : Diag
 		DiagramFontToolBar::ShowFont | DiagramFontToolBar::ShowBrush, diagramSize);
     captionEdit = new QTextEdit();
 //    inputPathEdit = new QTextEdit();
-    commandPath1Edit = new QLineEdit();
-    commandPath2Edit = new QLineEdit();
+    commandPathEdit = new QLineEdit();
+//    commandPath2Edit = new QLineEdit();
     param1Edit = new QLineEdit();
     param2Edit = new QLineEdit();
     fixedimageEdit = new QLineEdit();
@@ -468,7 +468,7 @@ ImageRegistrationItemDialog::ImageRegistrationItemDialog(QWidget* parent) : Diag
     pLayout->addRow("Work Model: ", workModelCombo);
     pLayout->addRow("Registration Method: ", imageregistrationTypeCombo);
     pLayout->addRow("Similarity Fcn: ", similarityMeasureCombo);
-    pLayout->addRow("CommandPath: ", commandPath1Edit);
+    pLayout->addRow("CommandPath: ", commandPathEdit);
     //pLayout->addRow("FixedImagePort: ", fixedImagePortCombo);
     //pLayout->addRow("FixedImage: ", fixedimageEdit);
     //pLayout->addRow("MovingImagePort: ", movingImagePortCombo);
@@ -545,11 +545,11 @@ void ImageRegistrationItemDialog::setProperties(const QHash<QString, QVariant>& 
         similarityMeasureCombo->setCurrentIndex(combo_text_hash[combo_text]);
     }
 
-    if (properties.contains("CommandPath1"))
-        commandPath1Edit->setText(properties["CommandPath1"].toString());
+    if (properties.contains("CommandPath"))
+        commandPathEdit->setText(properties["CommandPath"].toString());
 
-    if (properties.contains("CommandPath2"))
-        commandPath2Edit->setText(properties["CommandPath2"].toString());
+//    if (properties.contains("CommandPath2"))
+//        commandPath2Edit->setText(properties["CommandPath2"].toString());
 
 //    if (properties.contains("MovingImagePort"))
 //    {
@@ -605,8 +605,8 @@ QHash<QString, QVariant> ImageRegistrationItemDialog::properties() const
     properties["Work Model"] = QVariant(workModelCombo->currentText());
     properties["Registration Method"] = QVariant(imageregistrationTypeCombo->currentText());
     properties["Similarity Measure"] = QVariant(similarityMeasureCombo->currentText());
-    properties["CommandPath1"] = QVariant(commandPath1Edit->text());
-    properties["CommandPath2"] = QVariant(commandPath2Edit->text());
+    properties["CommandPath"] = QVariant(commandPathEdit->text());
+//    properties["CommandPath2"] = QVariant(commandPath2Edit->text());
     //properties["FixedImagePort"] = QVariant(fixedImagePortCombo->currentText());
     //properties["MovingImagePort"] = QVariant(movingImagePortCombo->currentText());
     properties["Param1"] = QVariant(param1Edit->text());

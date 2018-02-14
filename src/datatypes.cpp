@@ -20,7 +20,7 @@
  */
 
 #include <datatypes.h>
-
+#include <QDebug>
 //------------------------------------------------------------------------------------
 SeriesClass::SeriesClass() // Here you DEFINE your constructor
 {

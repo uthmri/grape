@@ -110,7 +110,6 @@ int ImageReformat::execute()
     dim_sign[1] = (arg[2] > 0) * 1 - (arg[2] < 0);
     if (im->NumDimensions==3) dim_sign[2] = (arg[3] > 0) * 1 - (arg[3] < 0);
 
-
     if (im->NumDimensions==3)
     {
         ImageOut = new ImageC(im,3);
@@ -119,9 +118,10 @@ int ImageReformat::execute()
         ImageOut->array_size[2] = dd[2];
 
         ImageOut->voxel_size[0] = in_vs[abs(arg[1])-1];
-        ImageOut->voxel_size[1] = in_vs[abs(arg[1])-2];
-        ImageOut->voxel_size[2] = in_vs[abs(arg[1])-3];
+        ImageOut->voxel_size[1] = in_vs[abs(arg[2])-1];
+        ImageOut->voxel_size[2] = in_vs[abs(arg[3])-1];
         ImageOut->voxel_size[3] = in_vs[3];
+
         float v;
         int xn, yn, zn;
         d[0] = im->array_size[0];
@@ -151,7 +151,7 @@ int ImageReformat::execute()
         ImageOut->array_size[1] = dd[1];
 
         ImageOut->voxel_size[0] = in_vs[abs(arg[1])-1];
-        ImageOut->voxel_size[1] = in_vs[abs(arg[1])-2];
+        ImageOut->voxel_size[1] = in_vs[abs(arg[2])-1];
 
         float v;
         int xn, yn, zn;

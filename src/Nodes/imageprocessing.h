@@ -63,6 +63,9 @@ protected:
     virtual QVariant* get_output_by_index(int out_id);
     virtual void set_input_by_index(int in_id, QVariant* varvalue);
 
+    template <class T>
+    void readArgDataArray(T x[], int Npts, QString arg);
+
 public:
 
     ImageProcessing(QObject *parent = 0);

@@ -74,7 +74,7 @@ void sink::set_input_by_index(int in_id, QVariant* varvalue)
                 return;
             }
             im = varvalue->value<ImageC*>();
-            qDebug() << "SINK (" << getType() << ") input image size = " << im->array_size[0] << im->array_size[1] << im->array_size[2] << im->array_size[3];
+            //qDebug() << "SINK (" << getType() << ") input image size = " << im->array_size[0] << im->array_size[1] << im->array_size[2] << im->array_size[3];
         }
         else if(outputType == "PrintText")
         {
@@ -105,7 +105,7 @@ int sink::execute()
     QString outputType = nodeItem->propertyValue("OutputType").toString();
     QString outputFilename = nodeItem->propertyValue("FilePath").toString();
 
-    qDebug() << getType() << "<" << this->getDiagramItem()->caption1() << ">" << "Mode = " << outputType;
+    //qDebug() << getType() << "<" << this->getDiagramItem()->caption1() << ">" << "Mode = " << outputType;
 
     if (outputType == "ImageDisplay" && isGraphical())
     {

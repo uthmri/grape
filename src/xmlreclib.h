@@ -45,7 +45,6 @@ protected:
 
 public:
     ImageC* im;
-    //ImageC im;
     vector <double> v1d;
 
 public:

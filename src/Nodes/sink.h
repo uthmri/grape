@@ -57,8 +57,6 @@ public:
     sink(QObject *parent = NULL);
     ~sink();
     ImageC* im;
-    //ImageC im;
-
 
     virtual QString uniqueKey() const;
 

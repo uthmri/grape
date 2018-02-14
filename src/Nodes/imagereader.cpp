@@ -108,7 +108,8 @@ int ImageReader::execute()
 
     QString InputImageType =  nodeItem->propertyValue("InputImageType").toString();
     QFile file(in_fname);
-    if( !file.exists() )
+    QFileInfo checkFile(in_fname);
+    if( !checkFile.exists() || !checkFile.isFile() || !checkFile.isReadable() )
     {
         qDebug() << "ERROR: ImageReader::execute()" << "cannot find file " << in_fname;
         return -1;
@@ -246,7 +247,6 @@ void ImageReader::clearNodeData()
     if(im)
     {
         im->clear();
-        im->init();
     }
 }
 //--------------------------------------------------------------------------------------------------

@@ -51,7 +51,6 @@ public:
 
 private:
     ImageC* im;
-    //ImageC im;
     float maxV, minV;
 
     QLabel *label;
@@ -59,9 +58,10 @@ private:
     QLabel *label3;
     QLabel *label4;
     QLabel *label5;
+    QLabel *label6;
 
-    QSlider *slider1;
-    QSlider *slider2;
+    QSlider *SliceSlider;
+    QSlider *StackSlider;
     QSlider *BrightnessSlider;
     QSlider *ContrastSlider;
 
@@ -69,10 +69,10 @@ private:
     QPushButton *okButton;
 
 public slots:
-    void on_slider_valueChanged1(int arg1);
-    void on_slider_valueChanged2(int arg2);
-    void on_slider_valueChanged3(int arg3);
-    void on_slider_valueChanged4(int arg4);
+    void on_SliceSlider_valueChanged(int arg);
+    void on_StackSlider_valueChanged(int arg);
+    void on_BrightnessSlider_valueChanged(int arg);
+    void on_ContrastSlider_valueChanged(int arg);
 
 };
 

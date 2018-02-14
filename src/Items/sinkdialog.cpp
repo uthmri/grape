@@ -24,63 +24,63 @@
 
 
 //================================================================================
-void SinkDialog::on_slider_valueChanged1(int arg1 )
+void SinkDialog::on_SliceSlider_valueChanged(int arg1 )
 {
     updateImage();
     label2->setText("Image Number is: "+ QString::number(arg1) );
 }
 //================================================================================
-void SinkDialog::on_slider_valueChanged2(int arg2 )
+void SinkDialog::on_StackSlider_valueChanged(int arg2 )
 {
     updateImage();
     label3->setText("Stack Number is: "+ QString::number(arg2) );
 }
 //================================================================================
-void SinkDialog::on_slider_valueChanged3(int arg3 )
+void SinkDialog::on_BrightnessSlider_valueChanged(int arg3 )
 {
     updateImage();
-    label4->setText("brightness value is: "+ QString::number(arg3) );
+    label4->setText("brightness value is: "+ QString::number(arg3) + " - Range[-100, 100] ");
 }
 //================================================================================
-void SinkDialog::on_slider_valueChanged4(int arg4 )
+void SinkDialog::on_ContrastSlider_valueChanged(int arg4 )
 {
     updateImage();
-    label5->setText("contrast is: "+ QString::number(arg4) );
+    label5->setText("contrast is: "+ QString::number(arg4)  + " - Range[0, 1000] ");
 }
 //================================================================================
 void SinkDialog::setImage(ImageC* I)
 {
     im = I;
-    slider1->setMinimum(1);
-    slider1->setMaximum(1);
-    slider2->setMinimum(1);
-    slider2->setMaximum(1);
+    SliceSlider->setMinimum(1);
+    SliceSlider->setMaximum(1);
+    StackSlider->setMinimum(1);
+    StackSlider->setMaximum(1);
     if(im->NumDimensions == 2)
     {
-        slider1->setEnabled(false);
-        slider2->setEnabled(false);
+        SliceSlider->setEnabled(false);
+        StackSlider->setEnabled(false);
     }
     else if(im->NumDimensions == 3)
     {
-        slider1->setEnabled(true);
-        slider2->setEnabled(false); //<<<<<<<<<<<setEnabled(false)
+        SliceSlider->setEnabled(true);
+        StackSlider->setEnabled(false);
         updateLabel(0);
-        slider1->setMinimum(1);
-        slider1->setMaximum(im->array_size[2]);
+        SliceSlider->setMinimum(1);
+        SliceSlider->setMaximum(im->array_size[2]);
         int mid_slc = (im->array_size[2]/2);
-        slider1->setSliderPosition(mid_slc);
+        SliceSlider->setSliderPosition(mid_slc);
     }
     else if(im->NumDimensions == 4)
     {
-        slider1->setEnabled(true);
-        slider2->setEnabled(true);
-        slider1->setMinimum(1);
-        slider1->setMaximum(im->array_size[2]);
-        slider2->setMinimum(1);
-        slider2->setMaximum(im->array_size[3]);
+        SliceSlider->setEnabled(true);
+        StackSlider->setEnabled(true);
+        SliceSlider->setMinimum(1);
+        SliceSlider->setMaximum(im->array_size[2]);
+        StackSlider->setMinimum(1);
+        StackSlider->setMaximum(im->array_size[3]);
         int mid_slc = (im->array_size[2]/2);
-        slider1->setSliderPosition(mid_slc);
-        slider2->setSliderPosition(1);
+        SliceSlider->setSliderPosition(mid_slc);
+        StackSlider->setSliderPosition(1);
     }
 
     BrightnessSlider->setMinimum(-100);
@@ -93,9 +93,19 @@ void SinkDialog::setImage(ImageC* I)
     ContrastSlider->setSliderPosition(100);  // 100%
     ContrastSlider->setEnabled(true);
 
+    label6->setText("Image size: " + QString::number(im->arraySize(0)) + " x " +
+                                     QString::number(im->arraySize(1)) + " x " +
+                                     QString::number(im->arraySize(2)) + " x " +
+                                     QString::number(im->arraySize(3)) +
+                    " --- Voxel size :" + QString::number(im->voxelSize(0)) + " x " +
+                                          QString::number(im->voxelSize(1)) + " x " +
+                                          QString::number(im->voxelSize(2)) + " x " +
+                                          QString::number(im->voxelSize(3)) );
+
     XMLRecReader X;
     maxV = X.imageMaxValue(im);
     minV = X.imageMinValue(im);
+
     updateImage();
 }
 //================================================================================
@@ -106,19 +116,20 @@ SinkDialog::SinkDialog(QWidget *parent) : QDialog(parent)
     label3= new QLabel("");
     label4= new QLabel("");
     label5= new QLabel("");
+    label6= new QLabel("");
 
-    slider1 = new QSlider(Qt::Horizontal, this);
-    slider2 = new QSlider(Qt::Horizontal, this);
+    SliceSlider = new QSlider(Qt::Horizontal, this);
+    StackSlider = new QSlider(Qt::Horizontal, this);
     BrightnessSlider = new QSlider(Qt::Horizontal, this);
     ContrastSlider = new QSlider(Qt::Horizontal, this);
 
     //Slice number
-    slider1->setMinimum(1);
-    slider1->setMaximum(2);
+    SliceSlider->setMinimum(1);
+    SliceSlider->setMaximum(2);
 
     //Stack number
-    slider2->setMinimum(1);
-    slider2->setMaximum(2);
+    StackSlider->setMinimum(1);
+    StackSlider->setMaximum(2);
 
     //Brightness
     BrightnessSlider->setMinimum(1);
@@ -136,6 +147,7 @@ SinkDialog::SinkDialog(QWidget *parent) : QDialog(parent)
    // QGroupBox* sliderGroup = new QGroupBox("Slider");
     QGroupBox* imageGroup = new QGroupBox("Image");
     QVBoxLayout* vLayout = new QVBoxLayout();
+    vLayout->addWidget(label6);
     vLayout->addWidget(label5);
     vLayout->addWidget(label4);
     vLayout->addWidget(label3);
@@ -150,8 +162,8 @@ SinkDialog::SinkDialog(QWidget *parent) : QDialog(parent)
 //    label->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 
     QFormLayout* pLayout = new QFormLayout();
-    pLayout->addRow("slice     ", slider1);
-    pLayout->addRow("stack     ", slider2);
+    pLayout->addRow("slice     ", SliceSlider);
+    pLayout->addRow("stack     ", StackSlider);
     pLayout->addRow("brightness", BrightnessSlider);
     pLayout->addRow("contrast  ", ContrastSlider);
     vLayout->addLayout(pLayout);
@@ -165,10 +177,10 @@ SinkDialog::SinkDialog(QWidget *parent) : QDialog(parent)
     setLayout(grid);
 
     connect(okButton, SIGNAL(clicked(bool)), this, SLOT(accept()));
-    connect(slider1, SIGNAL(valueChanged(int)), this, SLOT(on_slider_valueChanged1(int)));
-    connect(slider2, SIGNAL(valueChanged(int)), this, SLOT(on_slider_valueChanged2(int)));
-    connect(BrightnessSlider, SIGNAL(valueChanged(int)), this, SLOT(on_slider_valueChanged3(int)));
-    connect(ContrastSlider, SIGNAL(valueChanged(int)), this, SLOT(on_slider_valueChanged4(int)));
+    connect(SliceSlider, SIGNAL(valueChanged(int)), this, SLOT(on_SliceSlider_valueChanged(int)));
+    connect(StackSlider, SIGNAL(valueChanged(int)), this, SLOT(on_StackSlider_valueChanged(int)));
+    connect(BrightnessSlider, SIGNAL(valueChanged(int)), this, SLOT(on_BrightnessSlider_valueChanged(int)));
+    connect(ContrastSlider, SIGNAL(valueChanged(int)), this, SLOT(on_ContrastSlider_valueChanged(int)));
 }
 //=============================================================================================
 SinkDialog::~SinkDialog()
@@ -178,12 +190,13 @@ SinkDialog::~SinkDialog()
     delete label3;
     delete label4;
     delete label5;
+    delete label6;
 }
 //=============================================================================================
 void SinkDialog::updateImage()
 {
-    int d3 = slider1->value()-1;
-    int d4 = slider2->value()-1;
+    int d3 = SliceSlider->value()-1;
+    int d4 = StackSlider->value()-1;
     int d5 = BrightnessSlider->value();
     int d6 = ContrastSlider->value();
 
@@ -230,9 +243,9 @@ int SinkDialog::changeContrast( int value, int d6, int meanV)
 //=============================================================================================
 void SinkDialog::updateLabel(int value)
 {
-    int height0 = (100-value)*(slider1->height())/100;
-    int height= QStyle::sliderPositionFromValue(0,100,slider1->value(),slider1->height(), true);
-    label->move(slider1->width(), height);
+    int height0 = (100-value)*(SliceSlider->height())/100;
+    int height= QStyle::sliderPositionFromValue(0,100,SliceSlider->value(),SliceSlider->height(), true);
+    label->move(SliceSlider->width(), height);
 }
 //=============================================================================================
 void SinkDialog::Convert_vec3d_to_vec1d(vector<vector<vector<double> > > v3d, vector <double> &v1d, int sz1, int sz2, int sz3)

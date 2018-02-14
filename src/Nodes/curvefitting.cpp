@@ -332,138 +332,6 @@ int LookLocker(int m, int n, double *p, double *dy, double **dvec, void *vars)
     return 0;
 }
 //------------------------------------------------------------------------------
-#define Nsim            (88*5)
-#define T1min           150.0
-#define T1step          10.0
-#define Nlut            301
-#define SigRatioStart   -1.5
-#define SigRatioStep    0.01
-#define SigRatioEnd     1.50
-//------------------------------------------------------------------------------
-void CurveFitting::mp2rage_lut_calc(float T1LUT[], MP2RAGE_PARS PARS)
-{        
-    // Calculate the corrected signal ratio LUT in PSIR for a range of T1
-    // Output LUT is the interpolated T1 at all rignal ratio in units of 0.01
-    // i.e. T1 calculated at signal ratios: -1.5 : 0.01 : 1.5
-    // To use the LUT you have to round to the nearst 2 digites, add 1.5, and then
-    // multiply by 100: est_T1 = LUT(1+fix((my_sig_ratio+1.5) * 100))
-    float pi = 3.1415926536;
-
-//    float a1 = 7 * pi / 180;      // flip angle of 1st image
-//    float a2 = 5 * pi / 180;      // flip angle of 2nd image
-//    int np = 240;                // number of pulses; turbo factor; ETL
-//    int n_startup = 20;         // TFE startup pulses
-//    int n = np + n_startup;     // total number of pulses
-//    float TR_PSIR = 4500;         // cycle time = time between two inversion pulses
-//    float TR = 8.13;              // readout repeatition time
-//    float TE = 3.75;              // readout echo time
-//    float TI1 = 500;              // first TI
-//    float TI2 = 2600;             // value discarded; second TI is automatically calculated
-//    float eff = 0.96;             // efficiency of inversion pulse
-
-    float a1 = PARS.a1 * pi / 180;      // flip angle of 1st image
-    float a2 = PARS.a2 * pi / 180;      // flip angle of 2nd image
-    int np = PARS.np;                // number of pulses; turbo factor; ETL
-    int n_startup = PARS.n_startup;         // TFE startup pulses
-    int n = np + n_startup;     // total number of pulses
-    float TR_PSIR = PARS.TR_PSIR;         // cycle time = time between two inversion pulses
-    float TR = PARS.TR;              // readout repeatition time
-    float TE = PARS.TE;              // readout echo time
-    float TI1 = PARS.TI1;              // first TI
-    float TI2 = PARS.TI2;             // value discarded; second TI is automatically calculated
-    float eff = PARS.eff;             // efficiency of inversion pulse
-
-    float c1 = cos(a1);
-    float c2 = cos(a2);
-    float T1s[Nsim];
-    vector<float> S2c_psir_kellman;
-    S2c_psir_kellman.resize(Nsim);
-    float T1, E1, EA, EC;
-    float Tro = (n+n_startup) * TR;     // readout/ADC time
-    float TA = TI1 - (n_startup * TR);  // recovery period after each inversion pulse
-    float TC = TR_PSIR - (TA + Tro);    // recovery period after acq
-    float Mz = 1.0;
-    float M0 = 1.0;
-    float S1, S2;
-    int Niter = 2;
-
-    // loop on simulated T1 values
-    for (int i = 0; i < Nsim;  i++)
-    {
-        T1 = (float)T1min + i * (float)T1step;
-        T1s[i] = T1;
-
-        E1 = exp(-TR/T1);
-        EA = exp(-TA/T1);
-        EC = exp(-TC/T1);
-
-        float c1E1 = c1*E1;
-        float c2E1 = c2*E1;
-
-        for (int iter = 0; iter < Niter;  iter++)
-        {
-            // inversion pulse
-            Mz = -1 * eff * Mz;
-            // A-duration time delay
-            Mz = Mz * EA + M0 * (1-EA);
-            Mz = Mz * pow(c1E1,n_startup) + M0 * (1-E1) * (1-pow(c1E1,n_startup)) / (1-c1E1);
-            S1 = sin(a1) * Mz;
-            Mz = Mz * pow(c1E1,np) + M0 * (1-E1) * (1-pow(c1E1,np)) / (1-c1E1);
-            // C-duration time delay
-            Mz = Mz * EC + M0 * (1-EC);
-
-            // a2 pulse train  (centric orering)
-            Mz = Mz * pow(c2E1,n_startup) + M0 * (1-E1) * (1-pow(c2E1,n_startup)) / (1-c2E1);
-            S2 = sin(a2) * Mz;
-            Mz = Mz * pow(c2E1,np) + M0 * (1-E1) * (1-pow(c2E1,np)) / (1-c2E1);
-
-            // C-duration time delay
-            Mz = Mz * EC + M0 * (1-EC);
-        }
-
-        if(S2<0)
-            S2 = -S2;
-        else if(S2 == 0)
-            S2c_psir_kellman[i] = 0.0;
-        else
-            S2c_psir_kellman[i] = S1 / S2;
-    }
-
-    XMLRecReader X;
-    float sr_max = X.vectorMaxValue(S2c_psir_kellman);
-    float sr_min = X.vectorMinValue(S2c_psir_kellman);
-
-    vector<float> tmp;
-    tmp.resize(Nsim);
-
-    // interpolate the T1s and signal ratios
-    int  nn = round(((float)SigRatioEnd - (float)SigRatioStart) / (float)SigRatioStep) + 1;
-    float sr, index_min ;
-
-    // loop on all possible values of the signnal ratio (number=Nlut)
-    for(int jj = 0; jj < Nlut; jj++)
-    {
-        sr = (float)SigRatioStart + jj * (float)SigRatioStep;
-
-        if(sr < sr_min) sr = sr_min;
-        if(sr > sr_max) sr = sr_max;
-
-        // find the nearst sig-ratio value
-        for(int kk = 0; kk < tmp.size(); kk++)
-        {
-            tmp[kk] = (S2c_psir_kellman[kk] - sr);
-            if(tmp[kk] < 0.0)
-                tmp[kk] = -1.0 * tmp[kk];
-        }
-        index_min = X.indexofSmallestElement(tmp);
-
-        // nearst neighbor
-        T1LUT[jj] = (float)T1min + index_min * (float)T1step;
-    }
-}
-
-
-//------------------------------------------------------------------------------
 int CurveFitting::execute()
 {    
     clearOutputData();
@@ -917,16 +785,13 @@ void CurveFitting::clearNodeData()
         if(im1)
         {
             im1->clear();
-            im1->init();
         }
 
     if(CurveFittingtype=="T1-IR" || CurveFittingtype=="T2"|| CurveFittingtype=="T1-LookLocker")
         if(im2)
         {
             im2->clear();
-            im2->init();
         }
-
 }
 //--------------------------------------------------------------------------------------------------
 CurveFitting* CurveFitting::copy() const
@@ -1001,8 +866,6 @@ void CurveFitting::readArgDataArray(T x[], int Npts, QString arg)
 
 //    for(int i=0; i<Npts; i++)
 //        qDebug() << "in readArgDataArray, Arg0=x, i="<<i<<",  x="<<x[i];
-
-
 }
 //--------------------------------------------------------------------------------------------------
 template <class T>

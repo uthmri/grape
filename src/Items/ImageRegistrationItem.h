@@ -43,8 +43,8 @@ public:
     void setImageRegistrationType(const QString& imageRegistrationType);
     void setImageSimilarityMeasure(const QString& imageSimilarityMeasure); //<<<<<<<<<<<<<<<<<<<<
     void setRegistrationWorkModel(const QString& registrationWorkModel); //<<<<<<<<<<<<<<<<<<<<
-    void setCommandPath1(const QString& commandPath1);
-    void setCommandPath2(const QString& commandPath2);
+    void setCommandPath(const QString& commandPath1);
+//    void setCommandPath2(const QString& commandPath2);
     //void setFixedImagePort(const QString& fixedImagePort);
     //void setMovingImagePort(const QString& movingImagePort);
     void setParam1(const QString& param1);
@@ -59,8 +59,8 @@ public:
     QString imageRegistrationType() const;
     QString imageSimilarityMeasure() const; //<<<<<<<<<<<<<<<<<<<<
     QString registrationWorkModel() const;  //<<<<<<<<<<<<<<<<<<<<
-    QString commandPath1() const;
-    QString commandPath2() const;
+    QString commandPath() const;
+//    QString commandPath2() const;
     //QString fixedImagePort() const;
     //QString movingImagePort() const;
     QString param1() const;
@@ -111,8 +111,8 @@ class ImageRegistrationItemDialog : public DiagramItemPropertiesDialog
 private:
 	DiagramFontToolBar* fontToolBar;
 	QTextEdit* captionEdit;
-    QLineEdit* commandPath1Edit;
-    QLineEdit* commandPath2Edit;
+    QLineEdit* commandPathEdit;
+//    QLineEdit* commandPath2Edit;
     QLineEdit* param1Edit;
     QLineEdit* param2Edit;
     QLineEdit* input1Edit;

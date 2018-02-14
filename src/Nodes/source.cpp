@@ -82,7 +82,7 @@ bool source::fileExists(QString path)
 {
     QFileInfo checkFile(path);
     // check if file exists and if yes: Is it really a file and no directory?
-    return (checkFile.exists() && checkFile.isFile());
+    return (checkFile.exists() && checkFile.isFile() && checkFile.isReadable());
 }
 //--------------------------------------------------------------------------------------------------
 int source::execute()
@@ -276,7 +276,6 @@ void source::clearNodeData()
     if(im)
     {
         im->clear();
-        im->init();
     }
 }
 //--------------------------------------------------------------------------------------------------

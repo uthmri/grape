@@ -506,7 +506,9 @@ void Pipeline::run()
                 }
 
                 num_nodes_output_updated++;
-                //                    nii->clearNodeData();
+
+//                if(0)       //
+//                    nii->clearNodeData();
 
                 // special treatment for the LOOP node
                 //                        if(nii->getType()=="Loop")

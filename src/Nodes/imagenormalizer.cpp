@@ -134,10 +134,7 @@ int ImageNormalizer::validateRun()
 void ImageNormalizer::clearNodeData()
 {
     if(result)
-    {
         result->clear();
-        result->init();
-    }
 }
 //--------------------------------------------------------------------------------------------------
 ImageNormalizer* ImageNormalizer::copy() const

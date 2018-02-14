@@ -46,7 +46,6 @@ protected:
     QString in_fname;
     QString out_fname;
     ImageC* im;
-    //ImageC im;
     QVariant vI1;
     QVariant vI2;
     QVariant vI3;

@@ -507,11 +507,9 @@ void ImageArithmetic::clearNodeData()
 {
 //    if((src_assigned.at(0) && (arg1_type==0)) || (src_assigned.at(1) && (arg2_type==0)))
 //        result->clear();
+
     if(result)
-    {
         result->clear();
-        result->init();
-    }
 }
 //--------------------------------------------------------------------------------------------------
 ImageArithmetic* ImageArithmetic::copy() const

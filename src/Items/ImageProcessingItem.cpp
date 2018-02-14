@@ -342,6 +342,7 @@ ImageProcessingItemDialog::ImageProcessingItemDialog(QWidget* parent) : DiagramI
     ProcessingFcnList.push_back("segment: stochastic competition");
     ProcessingFcnList.push_back("resample: down_sample");
     ProcessingFcnList.push_back("resample: up_sample");
+    ProcessingFcnList.push_back("resample: zero_pad");
 
 	fontToolBar = new DiagramFontToolBar(
 		DiagramFontToolBar::ShowFont | DiagramFontToolBar::ShowBrush, diagramSize);
